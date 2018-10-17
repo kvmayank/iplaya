@@ -1,12 +1,11 @@
 import { Dispatch } from 'redux';
-import IEvent from '../models/event';
+import IArt from '../models/art';
 import * as types from './actionTypes';
 
-
-export function loadEvents() {
+export function loadArts() {
     return (dispatch: Dispatch) => {
-        dispatch(loadEventsBegin());
-        return fetch('/events?limit=10')
+        dispatch(loadArtsBegin());
+        return fetch('/arts?limit=10')
             .then(
                 response => {
                     if (!response.ok) {
@@ -16,23 +15,22 @@ export function loadEvents() {
                 }
             )
             .then(res => res.json())
-            .then(events => {
-                dispatch(loadEventsSuccess(events));
+            .then(camps => {
+                dispatch(loadArtsSuccess(camps));
             });
             // .catch(error => dispatch(fetchProductsFailure(error)));
     };
 }
 
-export function loadEventsSuccess(events: IEvent[]) {
-    console.log(events);
+export function loadArtsSuccess(arts: IArt[]) {
     return {
-        events,
-        type: types.LOAD_EVENTS_SUCCESS
+        arts,
+        type: types.LOAD_ARTS_SUCCESS
     };
 }
 
-export function loadEventsBegin() {  
+export function loadArtsBegin() {  
     return {
-        type: types.LOAD_EVENTS_BEGIN
+        type: types.LOAD_ARTS_BEGIN
     };
 }

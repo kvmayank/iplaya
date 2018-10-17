@@ -4,9 +4,12 @@ import {Db} from 'mongodb';
 
 const uri = "mongodb://kvmayank:delhi123@iplaya-shard-00-00-i5pik.mongodb.net:27017,iplaya-shard-00-01-i5pik.mongodb.net:27017,iplaya-shard-00-02-i5pik.mongodb.net:27017/test?ssl=true&replicaSet=iPlaya-shard-0&authSource=admin&retryWrites=true";
 const db_name = "playa_2018";
-const arts_collection = "arts";
-const events_collection = "events";
-const camps_collection = "camps";
+
+export enum Collections {
+    ARTS = 'arts',
+    EVENTS = 'events',
+    CAMPS = 'camps'
+}
 
 class DBClient {
     private client: MongoClient;
@@ -19,8 +22,8 @@ class DBClient {
         }        
     }
 
-    public async fetchEvents(limit: number): Promise<Array<IEvent>> {
-        return await this.db.collection('events').find().limit(limit).toArray();
+    public async fetchRecords(collecton: Collections, limit: number): Promise<Array<IEvent>> {
+        return await this.db.collection(collecton).find().limit(limit).toArray();
     }
 }
 

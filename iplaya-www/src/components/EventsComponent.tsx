@@ -9,17 +9,21 @@ interface IEventProps {
 export default class EventsComponent extends React.Component<IEventProps, {}> {
   public render() {
     return (
-        <ul className="event-list">
-          {this.props.events.map(this.createListItem)}
-        </ul>
+        <div>
+          <h1>Events</h1>
+          <div className="event-list">
+            {this.props.events.map(this.createListItem)}
+          </div>
+        </div>
       );
   }
 
   private createListItem(event: IEvent) {
     return (
-      <li>
+      <div className="event" key={event._id}>
         <Link to="#">{event.title}</Link>
-      </li>
+        <p>{event.description}</p>
+      </div>
     );
   }
 }

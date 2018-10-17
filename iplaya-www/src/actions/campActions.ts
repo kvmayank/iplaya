@@ -1,12 +1,11 @@
 import { Dispatch } from 'redux';
-import IEvent from '../models/event';
+import ICamp from '../models/camp';
 import * as types from './actionTypes';
 
-
-export function loadEvents() {
+export function loadCamps() {
     return (dispatch: Dispatch) => {
-        dispatch(loadEventsBegin());
-        return fetch('/events?limit=10')
+        dispatch(loadCampsBegin());
+        return fetch('/camps?limit=10')
             .then(
                 response => {
                     if (!response.ok) {
@@ -16,23 +15,22 @@ export function loadEvents() {
                 }
             )
             .then(res => res.json())
-            .then(events => {
-                dispatch(loadEventsSuccess(events));
+            .then(camps => {
+                dispatch(loadCampsSuccess(camps));
             });
             // .catch(error => dispatch(fetchProductsFailure(error)));
     };
 }
 
-export function loadEventsSuccess(events: IEvent[]) {
-    console.log(events);
+export function loadCampsSuccess(camps: ICamp[]) {
     return {
-        events,
-        type: types.LOAD_EVENTS_SUCCESS
+        camps,
+        type: types.LOAD_CAMPS_SUCCESS
     };
 }
 
-export function loadEventsBegin() {  
+export function loadCampsBegin() {  
     return {
-        type: types.LOAD_EVENTS_BEGIN
+        type: types.LOAD_CAMPS_BEGIN
     };
 }

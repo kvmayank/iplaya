@@ -1,4 +1,4 @@
-export default interface IEvent {
+export default interface IArt {
     description: string,
     title: string,
     _id: string

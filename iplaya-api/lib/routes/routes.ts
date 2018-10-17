@@ -1,7 +1,12 @@
 import {Request, Response} from "express";
-import {EventsController} from '../controllers/eventscontroller';
+
+import { ArtsController } from '../controllers/artsController';
+import { CampsController } from '../controllers/campscontroller';
+import { EventsController } from '../controllers/eventscontroller';
 
 export class Routes {
+    private artsController: ArtsController = new ArtsController();
+    private campsController: CampsController = new CampsController();
     private eventsController: EventsController = new EventsController();
 
     public routes(app): void {          
@@ -13,7 +18,13 @@ export class Routes {
         })
 
         app.route('/events/')
-        .get(this.eventsController.getAllEvents);
+        .get(this.eventsController.getAll);
+
+        app.route('/camps/')
+        .get(this.campsController.getAll);
+
+        app.route('/arts/')
+        .get(this.artsController.getAll);
 
         // Contact 
         app.route('/contact') 
