@@ -1,0 +1,23 @@
+{
+  "name": "iplaya-api",
+  "version": "1.0.0",
+  "description": "api suite for the iplaya app",
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node ./lib/server.ts",
+    "start": "nodemon ./dist/server.js",
+    "prod": "npm run build && npm run start",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Mayank Kumar",
+  "license": "ISC",
+  "dependencies": {
+    "@types/express": "^4.16.0",
+    "@types/mongodb": "^3.1.12",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "mongodb": "^3.1.8",
+    "mongoose": "^5.3.4",
+    "nodemon": "^1.18.4"
+  }
+}

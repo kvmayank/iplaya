@@ -1,0 +1,8 @@
+.header {
+    background-color: #111; /* Black*/
+    height: 20px;
+    line-height: 20px;
+    padding: 20px;
+    color: white;
+    text-align: right;
+}

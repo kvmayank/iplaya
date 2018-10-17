@@ -1,0 +1,33 @@
+.App {
+  display: block;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.AppOpenSidebar {
+  float: left;
+  transition: width .5s;
+}
+
+.AppClosedSidebar {
+  float: left;
+  transition: width .5s;
+}
+
+.AppBodyOpenSidebar {
+  transition: margin-left .5s;
+  margin-left: 160px;
+  overflow: hidden;
+}
+
+.AppBodyClosedSidebar {
+  transition: margin-left .5s;
+  margin-left: 62px;
+  overflow: hidden;
+}
+
+.clear {
+  clear: both;
+}
