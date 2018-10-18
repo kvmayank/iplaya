@@ -1,3 +1,4 @@
 export interface ILayoutState {
-    sidebarOpen: boolean
+    sidebarOpen: boolean,
+    searchQuery: string,
 }

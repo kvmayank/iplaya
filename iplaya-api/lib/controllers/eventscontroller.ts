@@ -14,4 +14,14 @@ export class EventsController {
             res.json(events);
         });
     }
+
+    public async search(req: Request, res: Response) {
+        var fetchEvents = async () => {
+            await DBClient.connect();
+            return await DBClient.searchRecords(Collections.EVENTS, {text: req.body.query});
+        }
+        fetchEvents().then(events => {
+            res.json(events);
+        });
+    }
 }

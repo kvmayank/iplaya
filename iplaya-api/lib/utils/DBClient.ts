@@ -11,6 +11,10 @@ export enum Collections {
     CAMPS = 'camps'
 }
 
+export interface ISearchQuery {
+    text: string,
+}
+
 class DBClient {
     private client: MongoClient;
     private db: Db;
@@ -24,6 +28,11 @@ class DBClient {
 
     public async fetchRecords(collecton: Collections, limit: number): Promise<Array<IEvent>> {
         return await this.db.collection(collecton).find().limit(limit).toArray();
+    }
+
+    public async searchRecords(collecton: Collections, query: ISearchQuery): Promise<Array<IEvent>> {
+        var queryObject: object = {'$text': {'$search': query.text}};
+        return await this.db.collection(collecton).find(queryObject).toArray();
     }
 }
 

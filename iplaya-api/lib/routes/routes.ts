@@ -20,6 +20,10 @@ export class Routes {
         app.route('/events/')
         .get(this.eventsController.getAll);
 
+        app.route('/events/search')
+        .post(this.eventsController.search);
+
+
         app.route('/camps/')
         .get(this.campsController.getAll);
 

@@ -24,7 +24,6 @@ export function loadEvents() {
 }
 
 export function loadEventsSuccess(events: IEvent[]) {
-    console.log(events);
     return {
         events,
         type: types.LOAD_EVENTS_SUCCESS

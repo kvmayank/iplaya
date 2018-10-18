@@ -22,7 +22,7 @@ export default class SidebarComponent extends React.Component<ISidebarProps, {}>
       );
     } else {
       return (
-        <nav className='topnav'>
+        <nav className='sidenavclosed'>
           <a href="#" onClick={this.props.onSideBarToggle}>
             <svg width="30" height="30" id="icoOpen">
                 <path d="M0,5 30,5" stroke="#000" strokeWidth="5"/>
