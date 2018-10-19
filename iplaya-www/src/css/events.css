@@ -1,0 +1,21 @@
+.event {
+    background-color: #EEE;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    padding: 8px;    
+}
+
+.eventDescription {
+    font-size: medium;
+    padding: 8px 0px;    
+}
+
+.eventType {
+    font-size: smaller;
+    color: #666;    
+}
+
+.hostCamp {
+    font-size: smaller;
+    color: #666;    
+}

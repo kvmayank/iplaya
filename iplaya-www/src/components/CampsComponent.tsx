@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { Link } from 'react-router-dom';
 import ICamp from '../models/camp';
+import '../css/camps.css'
+import '../css/common.css'
 
 interface ICampProps {
     camps: ICamp[]
@@ -20,10 +22,18 @@ export default class CampsComponent extends React.Component<ICampProps, {}> {
 
   private createListItem(camp: ICamp) {
     return (
-      <div className="camp" key={camp._id}>
-        <Link to="#">{camp.title}</Link>
-        <p>{camp.description}</p>
-      </div>
-    );
+        <div className="camp" key={camp.uid}>
+          <Link to="#">{camp.name}</Link>
+          <div className='campDescription'>{camp.description}</div>
+          <div className='campMetaData float_clear'>
+            <div className='campLocation float_left'>
+              {camp.location_string}
+            </div>
+            <div className='campType float_right'>
+              {camp.contact_email}
+            </div>
+          </div>
+        </div>
+      );    
   }
 }

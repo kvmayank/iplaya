@@ -8,7 +8,7 @@ export class CampsController {
         var limit: number = req.query.limit ? Number(req.query.limit) : DEFAULT_CAMPS_LIMIT;
         var fetchCamps = async (limit: number) => {
             await DBClient.connect();
-            return await DBClient.fetchRecords(Collections.CAMPS, limit);
+            return await DBClient.collection(Collections.CAMPS).find().limit(limit).toArray();
         }
         fetchCamps(limit).then(camps => {
             res.json(camps);

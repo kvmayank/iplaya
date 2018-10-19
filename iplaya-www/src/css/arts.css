@@ -1,0 +1,16 @@
+.art {
+    background-color: #EEE;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    padding: 8px;    
+}
+
+.artDescription {
+    font-size: medium;
+    padding: 8px 0px;    
+}
+
+.artType {
+    font-size: smaller;
+    color: #666;    
+}

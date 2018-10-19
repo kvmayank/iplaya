@@ -1,4 +1,4 @@
-import IEvent from '../models/event';
+// https://mongodb.github.io/node-mongodb-native/api-generated/mongoclient.html
 import {MongoClient} from 'mongodb';
 import {Db} from 'mongodb';
 
@@ -26,13 +26,8 @@ class DBClient {
         }        
     }
 
-    public async fetchRecords(collecton: Collections, limit: number): Promise<Array<IEvent>> {
-        return await this.db.collection(collecton).find().limit(limit).toArray();
-    }
-
-    public async searchRecords(collecton: Collections, query: ISearchQuery): Promise<Array<IEvent>> {
-        var queryObject: object = {'$text': {'$search': query.text}};
-        return await this.db.collection(collecton).find(queryObject).toArray();
+    public collection(collection: Collections) {
+        return this.db.collection(collection);
     }
 }
 

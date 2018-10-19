@@ -1,0 +1,16 @@
+.camp {
+    background-color: #EEE;
+    margin-bottom: 8px;
+    margin-right: 8px;
+    padding: 8px;    
+}
+
+.campDescription {
+    font-size: medium;
+    padding: 8px 0px;    
+}
+
+.campType {
+    font-size: smaller;
+    color: #666;    
+}
