@@ -1,5 +1,6 @@
 import IEvent from '../../models/event'
 
 export interface IEventsState {
-    events: IEvent[]
+    events: IEvent[],
+    selectedEvent?: IEvent,
 }

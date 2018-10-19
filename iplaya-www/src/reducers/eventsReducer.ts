@@ -10,6 +10,8 @@ const reducer: Reducer<IEventsState> = (state = initialState, action) => {
   switch(action.type) {
     case types.LOAD_EVENTS_SUCCESS:
         return { ...state, events: action.events }
+    case types.LOAD_EVENT_DETAILS_SUCCESS:
+        return { ...state, selectedEvent: action.event }
     case types.LOAD_EVENTS_BEGIN:
     default:
       return state;

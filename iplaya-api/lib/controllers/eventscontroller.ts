@@ -27,6 +27,22 @@ export class EventsController {
         });
     }
 
+    public async getEventDetails(req: Request, res: Response) {
+        var uid = req.params.uid;
+        var fetchEvent = async (uid: string) => {
+            await DBClient.connect();
+            return await DBClient.collection(Collections.EVENTS).aggregate(
+                [
+                    {'$match' : {'uid' : uid}},
+                    {'$lookup': CAMP_LOOKUP_OBJECT}
+                ]
+            ).toArray();
+        }
+        fetchEvent(uid).then(event => {
+            res.json(event);
+        });
+    }
+
     public async search(req: Request, res: Response) {
         var fetchEvents = async () => {            
             var queryObject: object = {'$text': {'$search': req.body.query.text}};

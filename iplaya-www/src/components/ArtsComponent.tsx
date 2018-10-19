@@ -21,7 +21,6 @@ export default class ArtsComponent extends React.Component<IArtProps, {}> {
   }
 
   private createListItem(art: IArt) {
-    console.log(art);
     return (
         <div className="art" key={art.uid}>
             <div className='float_clear'>

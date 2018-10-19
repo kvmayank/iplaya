@@ -23,6 +23,8 @@ export class Routes {
         app.route('/events/search')
         .post(this.eventsController.search);
 
+        app.route('/event/:uid')
+        .get(this.eventsController.getEventDetails);
 
         app.route('/camps/')
         .get(this.campsController.getAll);
