@@ -44,8 +44,8 @@ export class EventsController {
     }
 
     public async search(req: Request, res: Response) {
-        var fetchEvents = async () => {            
-            var queryObject: object = {'$text': {'$search': req.body.query.text}};
+        var fetchEvents = async (query: string) => {
+            var queryObject: object = {'$text': {'$search': query}};
             await DBClient.connect();
             return await DBClient.collection(Collections.EVENTS).aggregate(
                 [
@@ -54,7 +54,7 @@ export class EventsController {
                 ]
             ).toArray();
         }
-        fetchEvents().then(events => {
+        fetchEvents(req.body.query).then(events => {
             res.json(events);
         });
     }

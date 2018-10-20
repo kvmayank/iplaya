@@ -32,11 +32,14 @@ export default class EventDetailsComponent extends React.Component<IProps, {}> {
     }
 
   private renderCamp(camp: ICamp) {
-    return (
-      <div className='hostCamp'>
-        <Link to="#">{camp.name}</Link>
-        <div>{camp.location_string}</div>
-      </div>
-    );
+      if (camp !== undefined) {
+        return (
+            <div className='hostCamp'>
+              <Link to="#">{camp.name}</Link>
+              <div>{camp.location_string}</div>
+            </div>
+        );
+      }
+      return <div />;
   }
 }
