@@ -6,6 +6,13 @@ export function toggleLayoutSidebar() {
     return {type: types.LAYOUT_SIDEBAR_TOGGLE};
 }
 
+export function createActionForSearchDomainChange(domain: string) {
+    return {
+        domain,
+        type: types.LAYOUT_SEARCH_DOMAIN_CHANGE,        
+    };
+}
+
 export function createActionForSearchQueryChange(query: string) {
     return {
         query,

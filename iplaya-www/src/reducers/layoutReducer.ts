@@ -1,8 +1,9 @@
 import { Reducer } from 'redux'
 import * as types from '../actions/actionTypes';  
-import { ILayoutState } from '../store/layout/layoutState';
+import { ILayoutState, SearchDomain } from '../store/layout/layoutState';
 
 const initialState: ILayoutState = {
+  searchDomain: SearchDomain.camps,
   searchQuery: '',
   sidebarOpen: false,
 }
@@ -13,6 +14,8 @@ const reducer: Reducer<ILayoutState> = (state = initialState, action) => {
       return { ...state, sidebarOpen: !state.sidebarOpen };
     case types.LAYOUT_SEARCH_QUERY_CHANGE:
       return { ...state, searchQuery: action.query.toLowerCase()};
+    case types.LAYOUT_SEARCH_DOMAIN_CHANGE:
+    return { ...state, searchDomain: action.domain};
     default: 
       return state;
   }
