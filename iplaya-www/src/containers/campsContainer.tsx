@@ -2,21 +2,34 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, Dispatch } from 'redux'
 import { loadCamps } from '../actions/campActions';
+import { createActionForSearchDomainChange, createActionForSearchQueryChange, search } from '../actions/layoutActions';
 import CampsComponent from '../components/CampsComponent';
 import ICamp from '../models/camp';
 import { IApplicationState } from '../store/applicationState';
+import { SearchDomain } from '../store/layout/layoutState'
 
 interface ICampProps {
-    camps: ICamp[]
+    camps: ICamp[],
+    searchQuery: string,
+    searchDomain: SearchDomain,
 }
   
 interface ICampPropsFromDispatch {
-    loadCamps: typeof loadCamps
+    createActionForSearchQueryChange: typeof createActionForSearchQueryChange;
+    createActionForSearchDomainChange: typeof createActionForSearchDomainChange;
+    loadCamps: typeof loadCamps,
+    search: typeof search,    
 }
 
 class CampsContainer extends React.Component<ICampProps & ICampPropsFromDispatch, {}> {
     public componentDidMount() {
-        this.props.loadCamps();
+        if (this.props.searchDomain === SearchDomain.camps && this.props.searchQuery.length > 0) {
+            this.props.search(this.props.searchQuery, this.props.searchDomain);
+        } else {
+            this.props.createActionForSearchDomainChange(SearchDomain.camps);
+            this.props.createActionForSearchQueryChange('');
+            this.props.loadCamps();
+        }
     }
 
     public render() {
@@ -27,14 +40,19 @@ class CampsContainer extends React.Component<ICampProps & ICampPropsFromDispatch
 }
 
 
-const mapStateToProps = ({ camps }: IApplicationState) => ({
-    camps: camps.camps
+const mapStateToProps = ({ camps, layout }: IApplicationState) => ({
+    camps: camps.camps,
+    searchDomain: layout.searchDomain,
+    searchQuery: layout.searchQuery,
 })
   
 const mapDispatchToProps = (dispatch: Dispatch) => ({
-    loadCamps: bindActionCreators(loadCamps, dispatch)
+    createActionForSearchDomainChange: bindActionCreators(createActionForSearchDomainChange, dispatch),
+    createActionForSearchQueryChange: bindActionCreators(createActionForSearchQueryChange, dispatch),
+    loadCamps: bindActionCreators(loadCamps, dispatch),
+    search: bindActionCreators(search, dispatch),
 });
-  
+
 export default connect(
     mapStateToProps,
     mapDispatchToProps

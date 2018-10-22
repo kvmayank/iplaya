@@ -10,13 +10,17 @@ interface IEventProps {
 
 export default class EventsComponent extends React.Component<IEventProps, {}> {
   public render() {
-    return (
-        <div>
-          <h1>Events</h1>
-          <div className="event-list">
-            {this.props.events.map((event: IEvent) => <EventDetailsComponent event={event} key={event.uid} />)}
+    if (this.props.events !== undefined) {
+      return (
+          <div>
+            <h1>Events</h1>
+            <div className="event-list">
+              {this.props.events.map((event: IEvent) => <EventDetailsComponent event={event} key={event.uid} />)}
+            </div>
           </div>
-        </div>
-      );
+        );
+    } else {
+      return null;
+    }
   }
 }

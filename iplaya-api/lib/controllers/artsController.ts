@@ -14,4 +14,15 @@ export class ArtsController {
             res.json(camps);
         });
     }
+
+    public async search(req: Request, res: Response) {
+        var fetchRecords = async () => {
+            await DBClient.connect();
+            var queryObject: object = {'$text': {'$search': req.body.query}};
+            return await DBClient.collection(Collections.ARTS).find(queryObject).toArray();
+        }
+        fetchRecords().then(result => {
+            res.json(result);
+        });
+    }    
 }

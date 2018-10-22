@@ -21,6 +21,7 @@ export default class CampsComponent extends React.Component<ICampProps, {}> {
   }
 
   private createListItem(camp: ICamp) {
+      console.log(camp);
     return (
         <div className="camp" key={camp.uid}>
           <Link to="#">{camp.name}</Link>

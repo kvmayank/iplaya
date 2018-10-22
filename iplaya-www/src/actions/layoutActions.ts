@@ -1,6 +1,6 @@
 import { Dispatch } from 'redux';
-import IEvent from '../models/event';
 import * as types from './actionTypes';
+import { SearchDomain } from '../store/layout/layoutState';
 
 export function toggleLayoutSidebar() {
     return {type: types.LAYOUT_SIDEBAR_TOGGLE};
@@ -9,25 +9,25 @@ export function toggleLayoutSidebar() {
 export function createActionForSearchDomainChange(domain: string) {
     return {
         domain,
-        type: types.LAYOUT_SEARCH_DOMAIN_CHANGE,        
+        type: types.SEARCH_DOMAIN_CHANGE,        
     };
 }
 
 export function createActionForSearchQueryChange(query: string) {
     return {
         query,
-        type: types.LAYOUT_SEARCH_QUERY_CHANGE,        
+        type: types.SEARCH_QUERY_CHANGE,        
     };
 }
 
 export function createActionForSearchBegin(query: string) {
     return {
         query,
-        type: types.LAYOUT_SEARCH_BEGIN,
+        type: types.SEARCH_BEGIN,
     };
 }
 
-export function searchEvents(query: string) {
+export function search(query: string, domain: SearchDomain) {
     return (dispatch: Dispatch) => {
         dispatch(createActionForSearchBegin(query));
 
@@ -41,7 +41,7 @@ export function searchEvents(query: string) {
           formBody.push(encodedKey + "=" + encodedValue);
         }
         
-        return fetch('/events/search', {
+        return fetch(`/${domain}/search`, {
           body: formBody.join("&"),
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded;charset=UTF-8'
@@ -58,15 +58,27 @@ export function searchEvents(query: string) {
         )
         .then(res => res.json())
         .then(res => {
-            dispatch(createActionForSearchEventsSuccess(res));
+            dispatch(createActionForSearchSuccess(res, domain));
         });
         // .catch(error => dispatch(fetchProductsFailure(error)));
     };
 }
 
-export function createActionForSearchEventsSuccess(events: IEvent[]) {
-    return {
-        events,
-        type: types.LOAD_EVENTS_SUCCESS
+export function createActionForSearchSuccess(documents: object[], domain: SearchDomain) {
+    const actionObject = {
+        'type': getDocumentsLoadedActionForDomain(domain)
     };
+    actionObject[domain] = documents;
+    return actionObject;
+}
+
+function getDocumentsLoadedActionForDomain(domain: SearchDomain) {
+    switch (domain) {
+        case SearchDomain.events:
+            return types.LOAD_EVENTS_SUCCESS;
+        case SearchDomain.camps:
+            return types.LOAD_CAMPS_SUCCESS;
+        case SearchDomain.arts:
+            return types.LOAD_ARTS_SUCCESS;
+    }
 }

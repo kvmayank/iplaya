@@ -12,9 +12,9 @@ const reducer: Reducer<ILayoutState> = (state = initialState, action) => {
   switch(action.type) {
     case types.LAYOUT_SIDEBAR_TOGGLE:
       return { ...state, sidebarOpen: !state.sidebarOpen };
-    case types.LAYOUT_SEARCH_QUERY_CHANGE:
+    case types.SEARCH_QUERY_CHANGE:
       return { ...state, searchQuery: action.query.toLowerCase()};
-    case types.LAYOUT_SEARCH_DOMAIN_CHANGE:
+    case types.SEARCH_DOMAIN_CHANGE:
     return { ...state, searchDomain: action.domain};
     default: 
       return state;
